@@ -63,7 +63,8 @@ def parse_extraction(info: SheetInfo):
         input_st = input_st.sort_values(by=input_st.columns[col_index], na_position='first', kind="mergesort")
     except Exception as e:
         return "Could not sort input file, column is likely out of range: " + str(e)
-    
+
+    # skip any empty or nan values 
     index = 0
     while index < input_st.shape[0] and (input_st.iloc[index, col_index] == None or pd.isna(input_st.iloc[index, col_index])):
         index += 1
@@ -71,22 +72,25 @@ def parse_extraction(info: SheetInfo):
     while index < input_st.shape[0]:
         start_index = index
         start_name = input_st.iloc[start_index, col_index]
+        # excel sheet names can only be at most 30 characters long
         clamped_start_name = start_name[max(0,len(start_name)-31):]
 
+        # iterate until you find a value that is different to the beginning
         index += 1
         while index < input_st.shape[0] and input_st.iloc[index, col_index] == start_name:
             index += 1
         
+        # load sheet if it exists, otherwise create a new one
         sheet = pd.DataFrame()
         if clamped_start_name in output_wk.sheet_names:
             sheet = pd.read_excel(output_wk, clamped_start_name, header=None)
-        else:
-            sheet = pd.DataFrame()
         
+        # append the rows to the sheet
         for i in range(start_index, index):
             row = input_st.iloc[[i]].values.flatten().tolist()
             sheet = pd.concat([sheet, pd.DataFrame([row])], ignore_index=True)
         
+        # save the sheet
         try:
             with pd.ExcelWriter(info.output_fp, mode="a", if_sheet_exists="overlay") as writer:
                 sheet.to_excel(writer, sheet_name=clamped_start_name, header=False, index=False)

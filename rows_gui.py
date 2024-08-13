@@ -1,5 +1,6 @@
 from pygui_utils import *
 import json
+from openpyxl.utils.cell import column_index_from_string, get_column_letter
 
 import row_extraction
 
@@ -110,7 +111,11 @@ def save_to_row_table():
         selection_mode = f"Row {dpg.get_value("Rows row option")}"
     elif selection == "Code":
         selection_mode = f"Code \"{dpg.get_value("Rows code option")}\" at \"{dpg.get_value("Rows column option")}\""
-
+    try:
+        column_index_from_string(dpg.get_value("Rows column option"))
+    except:
+        return
+    
     output_fp = dpg.get_value("Rows Output FP Input")
     output_st = dpg.get_value("Rows Output ST Input")
     include_name = dpg.get_value("Rows Include Name Input")
@@ -165,6 +170,10 @@ def update_row_entry():
             selection_mode = f"Row {dpg.get_value("Rows row option")}"
         elif selection == "Code":
             selection_mode = f"Code \"{dpg.get_value("Rows code option")}\" at \"{dpg.get_value("Rows column option")}\""
+        try:
+            column_index_from_string(dpg.get_value("Rows column option"))
+        except:
+            return
 
         output_fp = dpg.get_value("Rows Output FP Input")
         output_st = dpg.get_value("Rows Output ST Input")

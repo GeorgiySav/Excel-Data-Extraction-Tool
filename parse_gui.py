@@ -1,5 +1,6 @@
 from pygui_utils import *
 import json
+from openpyxl.utils.cell import column_index_from_string, get_column_letter
 
 import parse_extraction
 
@@ -39,6 +40,11 @@ def save_to_parse_table():
     input_st = dpg.get_value("Parse Input ST Input")
     column = dpg.get_value("Parse Column Input")
 
+    try:
+        column_index_from_string(column)
+    except:
+        return
+
     output_fp = dpg.get_value("Parse Output FP Input")
 
     entry = {
@@ -71,6 +77,11 @@ def update_parse_entry():
     if name == "":
         return
         
+    try:
+        column_index_from_string(dpg.get_value("Parse Column Input"))
+    except:
+        return
+
     rows = dpg.get_item_children("parse table", 1)
     for row in rows:
         cells = dpg.get_item_children(row, 1)

@@ -6,10 +6,13 @@ import numpy as np
 
 from dataclasses import dataclass
 
+# for converting a column to integer. e.g. A to 0
 def column_string_to_index(letter: str):
     return column_index_from_string(letter) - 1
+# for converting an integer to column. e.g. 0 to A
 def column_index_to_string(index: int):
     return get_column_letter(index+1)
+
 
 @dataclass
 class SheetInfo:
@@ -63,6 +66,8 @@ def pull_rows(info: SheetInfo):
         except Exception as e:
             return "Provided row out of range: " + str(e)
     elif info.selection_mode["type"] == "code":
+        # iterate through the column until you find the code
+        # if the code isn't there, then the last row will be extracted
         index = 0
         col_index = column_string_to_index(info.selection_mode["column"])
         while index < input_st.shape[0] and input_st.iloc[index, col_index] != info.selection_mode["code"]:
@@ -70,10 +75,11 @@ def pull_rows(info: SheetInfo):
         index = min(index, input_st.shape[0] - 1)
         row = input_st.iloc[[index]].values.flatten().tolist()
 
+    # add the name at the start of the row if needed
     if info.add_name:
         row = [info.name] + row
 
-
+    # add the row to the next row available
     output_st = pd.concat([output_st, pd.DataFrame([row])], ignore_index=True)
 
     try:

@@ -51,6 +51,7 @@ def parse_json(filepath: str) -> list[SheetInfo]:
 
 def find_range(sheet, info):
     if info.range_mode["type"] == "End of column":
+        # for each column, iterate backwards from the end of column until you find a value. Return the longest column
         column_length = 1
         for col in info.columns:
             col_index = column_string_to_index(col)
@@ -66,6 +67,7 @@ def find_range(sheet, info):
         return info.range_mode["row"]
     
     elif info.range_mode["type"] == "Up to code":
+        # iterate until you find the code in the column or send the maximum length
         index = 0
         col_index = column_string_to_index(info.range_mode["column"])
         while index < sheet.shape[0] and sheet.iloc[index, col_index] != info.range_mode["code"]:
@@ -98,23 +100,26 @@ def next_empty_column(info: SheetInfo):
     # find the longest column in the input file
     column_length = find_range(input_st, info)
     
-    # reshape the output excel spreadsheet
+    # reshape the output excel spreadsheet so that it can fit the import
     for i in range(len(info.columns) + (1 if info.add_name else 0)):
         output_st[f'Unnamed: {next_column+1+i}'] = ' '
     for i in range(0, column_length - output_st.shape[0]):
         output_st.loc[output_st.shape[0]] = ' '
 
+    # add the name of the entry to each row
     if info.add_name:
         for i in range(0, column_length):
             output_st.iloc[i, next_column] = info.name
         next_column += 1
     
+    # add the column
     for col in info.columns:
         col_index = column_string_to_index(col)
         for i in range(column_length - info.row_offset):
             output_st.iloc[i, next_column] = input_st.iloc[i+info.row_offset, col_index]
         next_column += 1
     
+    # save the result
     try:
         output_st.to_excel(info.output_fp, sheet_name=info.output_st, header=False, index=False)
     except Exception as e:

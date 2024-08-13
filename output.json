@@ -1,0 +1,41 @@
+[
+  {
+    "name": "Tean Leys",
+    "input_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+    "input_st": "Tean Leys",
+    "output_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/test_output.xlsx",
+    "output_st": "Sheet1",
+    "row_offset": 4,
+    "columns": ["B", "C", "D"],
+    "enabled": true,
+    "mode": "Next empty row",
+    "add_name": true,
+    "column_offset": 1
+  },
+  {
+    "name": "Bodelwyddan",
+    "input_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+    "input_st": "Bodelwyddan ",
+    "output_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/test_output.xlsx",
+    "output_st": "Sheet1",
+    "row_offset": 3,
+    "columns": ["B", "C", "D"],
+    "enabled": true,
+    "mode": "Next empty row",
+    "add_name": true,
+    "column_offset": ""
+  },
+  {
+    "name": "Branxton",
+    "input_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+    "input_st": "Branxton",
+    "output_fp": "C:/Users/GeorgiySavchenko/Documents/Pull From SS/test_output.xlsx",
+    "output_st": "Sheet1",
+    "row_offset": 3,
+    "columns": ["B", "C", "E"],
+    "enabled": true,
+    "mode": "Next empty row",
+    "add_name": true,
+    "column_offset": ""
+  }
+]

@@ -1,0 +1,92 @@
+[
+  {
+    "name": "Tean Leys Row Example",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+      "sheetname": "Tean Leys",
+      "selection_mode": {
+        "type": "code",
+        "code": "Total",
+        "column": "B"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Bonsdale",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+      "sheetname": "Bonsdale (Ragwhistle)",
+      "selection_mode": {
+        "type": "code",
+        "code": "Total",
+        "column": "B"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Bodelwyddan",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+      "sheetname": "Bodelwyddan ",
+      "selection_mode": {
+        "type": "code",
+        "code": "Total",
+        "column": "B"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Lime Down",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+      "sheetname": "Lime Down (Melksham)",
+      "selection_mode": {
+        "type": "code",
+        "code": "Total",
+        "column": "B"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Green Hill",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\UK Project Budgets - 50MW 250MW 480MW v12.xlsx",
+      "sheetname": "Green Hill (Grendon)",
+      "selection_mode": {
+        "type": "code",
+        "code": "Total",
+        "column": "B"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "include_name": true
+    }
+  }
+]

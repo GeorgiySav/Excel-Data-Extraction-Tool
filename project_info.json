@@ -1,0 +1,71 @@
+[
+  {
+    "name": "Test Row",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_input.xlsx",
+      "sheetname": "Sheet1",
+      "row_offset": 1,
+      "columns": [
+        "A",
+        "B"
+      ],
+      "range_mode": {
+        "type": "Up to row",
+        "row": 155
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "insert_mode": "Next empty row",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Test Code",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_input.xlsx",
+      "sheetname": "Sheet1",
+      "row_offset": 1,
+      "columns": [
+        "A",
+        "B"
+      ],
+      "range_mode": {
+        "type": "Up to code",
+        "code": "stop",
+        "column": "C"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "insert_mode": "Next empty row",
+      "include_name": true
+    }
+  },
+  {
+    "name": "Test Column",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_input.xlsx",
+      "sheetname": "Sheet1",
+      "row_offset": 1,
+      "columns": [
+        "A",
+        "B"
+      ],
+      "range_mode": {
+        "type": "End of column"
+      }
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "insert_mode": "Next empty row",
+      "include_name": true
+    }
+  }
+]

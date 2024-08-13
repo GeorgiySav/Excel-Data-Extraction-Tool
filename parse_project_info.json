@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Test",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_output.xlsx",
+      "sheetname": "Sheet1",
+      "column": "ZZ"
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Documents\\Pull From SS\\test_input.xlsx"
+    }
+  }
+]

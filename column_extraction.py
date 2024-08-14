@@ -9,7 +9,7 @@ from dataclasses import dataclass
 def column_string_to_index(letter: str):
     return column_index_from_string(letter) - 1
 def column_index_to_string(index: int):
-    return get_column_letter(index+1)
+    return get_column_letter(index + 1)
 
 @dataclass
 class SheetInfo:

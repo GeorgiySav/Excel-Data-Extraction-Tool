@@ -163,16 +163,6 @@ def save_to_parse_file():
         json.dump(entries, json_file, indent=2)
 
 
-def add_error_msg_to_console(message):
-    dpg.add_text(message, parent="console_window", color=(196, 43, 43))
-    dpg.set_y_scroll("console_window", dpg.get_y_scroll_max("console_window"))
-
-
-def add_valid_msg_to_console(message):
-    dpg.add_text(message, parent="console_window", color=(69, 214, 69))
-    dpg.set_y_scroll("console_window", dpg.get_y_scroll_max("console_window"))
-
-
 def parse_file():
     stati = parse_extraction.run()
     for status in stati:

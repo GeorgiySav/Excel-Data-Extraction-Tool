@@ -11,7 +11,7 @@ def column_string_to_index(letter: str):
     return column_index_from_string(letter) - 1
 # for converting an integer to column. e.g. 0 to A
 def column_index_to_string(index: int):
-    return get_column_letter(index+1)
+    return get_column_letter(index + 1)
 
 
 @dataclass

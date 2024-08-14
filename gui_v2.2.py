@@ -16,7 +16,7 @@ with dpg.window(tag="Primary Window"):
         with dpg.tab(label="Parse"):
             parse_gui.parse_gui()
 
-    with dpg.child_window(menubar=True, horizontal_scrollbar=True, autosize_x=True, height=500, tag="console_window"):
+    with dpg.child_window(menubar=True, horizontal_scrollbar=True, autosize_x=True, height=300, tag="console_window"):
         with dpg.menu_bar():
             dpg.add_menu(label="Status Reports")
     

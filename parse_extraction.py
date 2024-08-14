@@ -99,7 +99,7 @@ def parse_extraction(info: SheetInfo):
 
 def run():
     try:
-        infos = parse_json("parse_projec_info.json")
+        infos = parse_json("parse_project_info.json")
     except Exception as e:
         return [f"Failed to open the parse files: {str(e)}"]
     

@@ -4,6 +4,7 @@ import json
 import column_extraction
 import ast
 
+# converts json format to string for range option
 def range_to_string(input):
     '''
     "range" : {

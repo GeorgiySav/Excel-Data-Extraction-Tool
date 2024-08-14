@@ -34,16 +34,19 @@ def parse_json(filepath: str) -> list[SheetInfo]:
         # loop through every entry in the json
         for item in project_json:
             # extract the data and save it into a the sheet info array
-            sheet_temp = SheetInfo(
-                name=item['name'],
-                enabled=item['enabled'],
-                input_fp=item['input']['filepath'],
-                input_st=item['input']['sheetname'],
-                selection_mode=item['input']['selection_mode'],
-                output_fp=item['output']['filepath'],
-                output_st=item['output']['sheetname'],
-                add_name=item['output']['include_name'])
-            infos.append(sheet_temp)
+            try:
+                sheet_temp = SheetInfo(
+                    name=item['name'],
+                    enabled=item['enabled'],
+                    input_fp=item['input']['filepath'],
+                    input_st=item['input']['sheetname'],
+                    selection_mode=item['input']['selection_mode'],
+                    output_fp=item['output']['filepath'],
+                    output_st=item['output']['sheetname'],
+                    add_name=item['output']['include_name'])
+                infos.append(sheet_temp)#
+            except Exception as e:
+                raise e
     return infos
 
 
@@ -69,7 +72,10 @@ def pull_rows(info: SheetInfo):
         # iterate through the column until you find the code
         # if the code isn't there, then the last row will be extracted
         index = 0
-        col_index = column_string_to_index(info.selection_mode["column"])
+        try:
+            col_index = column_string_to_index(info.selection_mode["column"])
+        except Exception as e:
+            return "Provided column out of range: " + str(e)
         while index < input_st.shape[0] and input_st.iloc[index, col_index] != info.selection_mode["code"]:
             index += 1
         index = min(index, input_st.shape[0] - 1)
@@ -89,7 +95,11 @@ def pull_rows(info: SheetInfo):
     
 
 def run():
-    infos = parse_json("row_project_info.json")
+    try:
+        infos = parse_json("row_project_info.json")
+    except Exception as e:
+        return [f"Failed to open the parse files: {str(e)}"]
+    
     status = []
     for info in infos:
         if info.enabled == False:

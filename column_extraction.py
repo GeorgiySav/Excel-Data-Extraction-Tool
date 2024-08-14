@@ -33,19 +33,22 @@ def parse_json(filepath: str) -> list[SheetInfo]:
         # loop through every entry in the json
         for item in project_json:
             # extract the data and save it into a the sheet info array
-            sheet_temp = SheetInfo(
-                name=item['name'],
-                enabled=item['enabled'],
-                input_fp=item['input']['filepath'],
-                input_st=item['input']['sheetname'],
-                row_offset=item['input']['row_offset'],
-                columns=item['input']['columns'],
-                range_mode=item['input']['range_mode'],
-                output_fp=item['output']['filepath'],
-                output_st=item['output']['sheetname'],
-                mode=item['output']['insert_mode'],
-                add_name=item['output']['include_name'])
-            infos.append(sheet_temp)
+            try:
+                sheet_temp = SheetInfo(
+                    name=item['name'],
+                    enabled=item['enabled'],
+                    input_fp=item['input']['filepath'],
+                    input_st=item['input']['sheetname'],
+                    row_offset=item['input']['row_offset'],
+                    columns=item['input']['columns'],
+                    range_mode=item['input']['range_mode'],
+                    output_fp=item['output']['filepath'],
+                    output_st=item['output']['sheetname'],
+                    mode=item['output']['insert_mode'],
+                    add_name=item['output']['include_name'])
+                infos.append(sheet_temp)
+            except Exception as e:
+                raise e
     return infos
 
 
@@ -96,6 +99,9 @@ def next_empty_column(info: SheetInfo):
     if info.range_mode["type"] == "Up to row":
         if info.range_mode["row"] >= input_st.shape[0]:
             return "Row provided isn't within range"
+
+    if info.row_offset >= input_st.shape[0]:
+        return "Offset row provided is out of range"
 
     # find the longest column in the input file
     column_length = find_range(input_st, info)
@@ -148,6 +154,9 @@ def next_empty_row(info: SheetInfo):
         if info.range_mode["row"] >= input_st.shape[0]:
             return "Row provided isn't within range"
 
+    if info.row_offset >= input_st.shape[0]:
+        return "Offset row provided is out of range"
+
     # find the longest column in the input file
     column_length = find_range(input_st, info)
  
@@ -175,7 +184,11 @@ def next_empty_row(info: SheetInfo):
 
 
 def run():
-    infos = parse_json("project_info.json")
+    try:
+        infos = parse_json("project_info.json")
+    except Exception as e:
+        return [f"Failed to open the parse files: {str(e)}"]
+    
     status = []
     for info in infos:
         if info.enabled == False:

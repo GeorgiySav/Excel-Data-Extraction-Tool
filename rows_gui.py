@@ -134,7 +134,6 @@ def save_to_row_table():
             "include_name": include_name
         }
     }
-    print(entry)
 
     with dpg.table_row(parent="row table"):
         dpg.add_selectable(label=name, span_columns=True, callback=table_row_callback, user_data=entry)
@@ -249,7 +248,6 @@ def save_to_row_file():
         entry["output"]["sheetname"] = dpg.get_item_configuration(cells[6])["label"]
         entry["output"]["include_name"] = True if dpg.get_item_configuration(cells[7])["label"] == "True" else False
 
-        print(entry)
         entries.append(entry)
     
     with open('row_project_info.json', 'w') as json_file:
@@ -268,7 +266,6 @@ def pull_rows():
 def load_to_rows_table(filepath: str):
     with open(filepath, 'r') as json_file:
         entries = json.load(json_file)
-        print(f'entries {entries}')
         for entry in entries:
             name = entry["name"]
             enabled = entry["enabled"]

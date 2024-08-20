@@ -59,7 +59,6 @@ def save_to_parse_table():
             "filepath": output_fp,
         }
     }
-    print(entry)
 
     with dpg.table_row(parent="parse table"):
         dpg.add_selectable(label=name, span_columns=True, callback=table_row_callback, user_data=entry)
@@ -156,7 +155,6 @@ def save_to_parse_file():
         entry["output"] = {}
         entry["output"]["filepath"] = dpg.get_item_configuration(cells[5])["label"]
 
-        print(entry)
         entries.append(entry)
     
     with open('parse_project_info.json', 'w') as json_file:
@@ -175,7 +173,6 @@ def parse_file():
 def load_to_parse_table(filepath: str):
     with open(filepath, 'r') as json_file:
         entries = json.load(json_file)
-        print(f'entries {entries}')
         for entry in entries:
             name = entry["name"]
             enabled = entry["enabled"]

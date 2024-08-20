@@ -25,6 +25,8 @@ class SheetInfo:
     mode: str
     add_name: bool
 
+
+# loads the entries from the json file
 def parse_json(filepath: str) -> list[SheetInfo]:
     infos = []
     # read the json file
@@ -52,6 +54,7 @@ def parse_json(filepath: str) -> list[SheetInfo]:
     return infos
 
 
+# finds the end of the column(s)
 def find_range(sheet, info):
     if info.range_mode["type"] == "End of column":
         # for each column, iterate backwards from the end of column until you find a value. Return the longest column
@@ -78,6 +81,7 @@ def find_range(sheet, info):
         return min(index+1, sheet.shape[0])
 
 
+# appends the columns in the next empty column
 def next_empty_column(info: SheetInfo):
     try:
         input_st = pd.read_excel(info.input_fp, sheet_name=info.input_st, header=None)
@@ -132,6 +136,7 @@ def next_empty_column(info: SheetInfo):
         return "Failed to write to the output file: " + str(e)
 
 
+# append the columns in the next empty row
 def next_empty_row(info: SheetInfo):
     try:
         input_st = pd.read_excel(info.input_fp, sheet_name=info.input_st, header=None)
@@ -160,17 +165,19 @@ def next_empty_row(info: SheetInfo):
     # find the longest column in the input file
     column_length = find_range(input_st, info)
  
-    # reshape the output excel spreadsheet
+    # reshape the output excel spreadsheet so that it can fit the pulled data
     for i in range(output_st.shape[1], len(info.columns) + (1 if info.add_name else 0)):
         output_st[f'Unnamed: {i}'] = ' '
     for i in range(next_row, column_length + next_row - info.row_offset):
         output_st.loc[output_st.shape[0]] = ' '
 
+    next_column = 0
+    # insert the row of names before the columns extracted
     if info.add_name:
         for i in range(next_row, next_row + column_length - info.row_offset):
             output_st.iloc[i, 0] = info.name
+        next_column += 1
 
-    next_column = 1
     for col in info.columns:
         col_index = column_string_to_index(col)
         for i in range(next_row, next_row + column_length - info.row_offset):
@@ -190,6 +197,7 @@ def run():
         return [f"Failed to open the parse files: {str(e)}"]
     
     status = []
+    # for every entry in the file, pull data if they are enabled
     for info in infos:
         if info.enabled == False:
             continue

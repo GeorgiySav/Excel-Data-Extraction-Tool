@@ -125,7 +125,24 @@ Parsing file:
 
 Error Messages:
 At the bottom of the application, there is a status report window that reports the success and errors when you pull entries. 
-
-Dealing with issues with the json files:
-If you cannot fix the issue, the easiest solution is to just clear the entire file and add [] to the beginning of it. Then you can re-enter all profiles again.
-Or ask ChatGPT to inspect the file along with the error message and it might be able to provide a solution.
+Error Messages and their meanings:
+ - Failed to open the parse files: ...
+   - There's an issue with the files that store the entries.
+   - The file name could've changed from what it should be
+   - Or the formatting has been corrupted. In this scenario you can attempt to fix the formatting, however if you have no experience with dealing with JSON files, then it might be very difficult. Otherwise you should replace the entire contents of the file with a pair of square brackets: []
+ - Failed to open the input file: 
+   - There has been an issue with opening the input excel spreadsheet. The status report should be able to provide a good enough reason for why it wasn't able to open to file
+   - Just make sure the filepath is correct and the sheetname is also exactly the same as the one in the file. Remember the values are case and space sensitive
+ - Failed to open the output file:
+   - The same as the previous error but with the output excel spreadsheet.
+ - Columns provided aren't within the range in the input file:
+   - At least one of the columns provided to be extracted is outside of the range of the excel sheet. 
+   - Make sure that the column isn't empty
+ - Row provided isn't within range:
+   - Row index provided is outside of the range of the sheet
+   - The row index cannot be higher than the last row
+ - Offset row provided is out of range:
+   - Same as the previous error
+ - Failed to write to the output file: ...
+   - There's an issue with saving the changes to the output file.
+   - Make sure that the output file is closed

@@ -7,6 +7,7 @@ import parse_gui
 
 dpg.create_context()
 
+
 with dpg.window(tag="Primary Window"):
     with dpg.tab_bar():
         with dpg.tab(label="Columns"):
@@ -19,7 +20,7 @@ with dpg.window(tag="Primary Window"):
     with dpg.child_window(menubar=True, horizontal_scrollbar=True, autosize_x=True, height=300, tag="console_window"):
         with dpg.menu_bar():
             dpg.add_menu(label="Status Reports")
-    
+
 
 dpg.create_viewport(title='Custom Title', width=900, height=900)
 dpg.setup_dearpygui()

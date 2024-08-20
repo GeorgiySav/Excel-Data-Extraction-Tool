@@ -80,7 +80,6 @@ def table_row_callback(sender, app_data, user_data):
     row_offset = user_data["input"]["row_offset"]
     columns = user_data["input"]["columns"]
     range_mode = user_data["input"]["range_mode"]
-    print(range_mode)
 
     output_fp = user_data["output"]["filepath"]
     output_st = user_data["output"]["sheetname"]
@@ -101,7 +100,6 @@ def table_row_callback(sender, app_data, user_data):
         add_letter()
     dpg.set_value("Column Input", "")
 
-    print(range_mode["type"])
     if range_mode["type"] == "End of column":
         dpg.set_value("Range Input", "End Of Column")
         dpg.hide_item("row option")
@@ -163,11 +161,9 @@ def save_to_column_table():
     column_children = dpg.get_item_children("Columns List", 1)
     for i in range(0, len(column_children)):
         child = column_children[i]
-        print(dpg.get_item_configuration(dpg.get_item_children(child, 1)[1]))
         columns.append(dpg.get_item_configuration(dpg.get_item_children(child, 1)[0])["label"])
 
     range_mode = ""
-    print(dpg.get_value("Range Input"))
     if dpg.get_value("Range Input") == "End Of Column":
         range_mode = range_to_string({
             "type": "End of column"
@@ -210,7 +206,6 @@ def save_to_column_table():
             "include_name": include_name
         }
     }
-    print(entry)
 
     with dpg.table_row(parent="table"):
         dpg.add_selectable(label=name, span_columns=True, callback=table_row_callback, user_data=entry)
@@ -252,7 +247,6 @@ def update_column_entry():
             columns.append(dpg.get_item_configuration(dpg.get_item_children(child, 1)[0])["label"])
 
         range_mode = ""
-        print(dpg.get_value("Range Input"))
         if dpg.get_value("Range Input") == "End Of Column":
             range_mode = range_to_string({
                 "type": "End of column"
@@ -361,7 +355,6 @@ def save_to_column_file():
         entry["output"]["insert_mode"] = dpg.get_item_configuration(cells[9])["label"]
         entry["output"]["include_name"] = True if dpg.get_item_configuration(cells[10])["label"] == "True" else False
 
-        print(entry)
         entries.append(entry)
     
     with open('project_info.json', 'w') as json_file:

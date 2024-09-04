@@ -1,0 +1,14 @@
+[
+  {
+    "name": "Test",
+    "enabled": true,
+    "input": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Downloads\\QrY_WIP_detail.xlsx",
+      "sheetname": "QrY_WIP_detail",
+      "column": "C"
+    },
+    "output": {
+      "filepath": "C:\\Users\\GeorgiySavchenko\\Downloads\\QrY_WIP_detail.xlsx"
+    }
+  }
+]
